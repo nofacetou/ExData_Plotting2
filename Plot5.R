@@ -12,5 +12,5 @@ balt_moto = balt[balt$SCC %in% moto,]
 require("ggplot2")
 g = ggplot(balt_moto, aes(x = year, y= Emissions))
 png(file = "ExData_Plotting2/figure/plot5.png", width = 480, height = 480, units = "px", bg = "transparent")
-g + geom_line(stat="summary", fun.y="sum") + ylab(expression('Total Coal Combustion-related PM'[2.5]*" emission "))
+g + geom_line(stat="summary", fun.y="sum") + ylab(expression('Total PM'[2.5]*" emission from motor vehicle sources in Baltimore"))
 dev.off()

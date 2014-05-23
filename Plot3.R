@@ -5,11 +5,9 @@ unzip("exdata-data-NEI_data.zip", overwrite=FALSE)
 #read the data
 NEI <- readRDS("summarySCC_PM25.rds")
 SCC <- readRDS("Source_Classification_Code.rds")
-#subset the datase to keep coal combustion-related data only
-coalSCC <- SCC[grepl("coal", SCC$Short.Name, ignore.case=TRUE) & grepl("(?=.*coal)(?=.*comb)", SCC$EI.Sector, ignore.case=TRUE, perl=TRUE),1]
-coal = NEI[NEI$SCC %in% coalSCC,]
+balt = NEI[NEI$fips == "24510",]
 require("ggplot2")
-g = ggplot(balt, aes(x = year, y= Emissions))
+g = ggplot(balt, aes(x = year, y= Emissions, color = type))
 png(file = "ExData_Plotting2/figure/plot3.png", width = 480, height = 480, units = "px", bg = "transparent")
-g + geom_line(stat="summary", fun.y="sum") + ylab(expression('Total Coal Combustion-related PM'[2.5]*" emission "))
+g + geom_line(stat="summary", fun.y="sum") + ylab(expression('total PM'[2.5]*" emission in Baltimore"))
 dev.off()
